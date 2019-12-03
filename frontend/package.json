@@ -1,0 +1,21 @@
+{
+  "name": "@shopgate/auth-apple",
+  "version": "1.0.0",
+  "description": "An awesome extesion for my awesome organization",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@shopgate/eslint-config": "^6.9.0",
+    "@shopgate/pwa-common": "^6.9.0",
+    "@shopgate/pwa-core": "^6.9.0",
+    "@shopgate/pwa-unit-test": "^6.9.0",
+    "eslint": "~5.12.0",
+    "jest": "^24.9.0",
+    "prop-types": "^15.6.0",
+    "react": "~16.8.4",
+    "react-dom": "~16.8.4",
+    "react-redux": "^5.0.6"
+  },
+  "peerDependencies": {
+    "@shopgate/pwa-common": "^6.9.0"
+  }
+}

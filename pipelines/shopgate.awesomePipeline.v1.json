@@ -1,0 +1,12 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.awesomePipeline.v1",
+    "public": true,
+    "input": [],
+    "output": [],
+    "steps": [
+
+    ]
+  }
+}
