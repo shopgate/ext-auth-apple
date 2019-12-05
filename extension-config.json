@@ -1,7 +1,49 @@
 {
   "version": "1.0.0",
   "id": "@shopgate/auth-apple",
-  "components": [],
-  "configuration": {},
+  "components": [
+    {
+      "id": "LoginFormSignInWithApple",
+      "path": "frontend/components/LoginFormSignInWithApple.jsx",
+      "target": "page.login.form.before",
+      "type": "portals"
+    },
+    {
+      "id": "SignInWithApple",
+      "path": "frontend/components/SignInWithApple.jsx",
+      "target": "user-menu.container.before",
+      "type": "portals"
+    },
+    {
+      "id": "subscriptions",
+      "path": "frontend/subscriptions/index.js",
+      "type": "subscribers"
+    },
+    {
+      "id": "reducer",
+      "path": "frontend/reducers/index.js",
+      "type": "reducers"
+    }
+  ],
+  "configuration": {
+    "shopNumber": {
+      "type": "static",
+      "destination": "backend",
+      "params": {
+        "value": "%(shopId)s"
+      }
+    },
+    "appleLoginConfig": {
+      "type": "bigApi",
+      "destination": "backend",
+      "default": null,
+      "params": {
+        "method": "GET",
+        "service": "config",
+        "path": "/v1/shop/%(shopId)s/apple_login_config?parsed=true",
+        "key": "value"
+      }
+    }
+  },
   "trusted": true
 }
