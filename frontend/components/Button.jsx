@@ -54,7 +54,7 @@ function Button({ signIn }) {
     <button type="button" className={btnClasses} onClick={handleSignIn} disabled={loading}>
       <img
         className={image}
-        src="https://appleid.cdn-apple.com/appleid/button?height=40&width=375&color=black&locale=de_DE"
+        src="https://appleid.cdn-apple.com/appleid/button?height=40&width=375&color=black&locale=de_DE&scale=2"
         alt="Sign in with Apple"
       />
     </button>
