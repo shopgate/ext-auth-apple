@@ -19,7 +19,7 @@ export default (subscribe) => {
   });
 
   subscribe(signInWithApple$, async ({ dispatch }) => {
-    const { pattern, state: { redirect: { location = '' } = {} } } = getCurrentRoute();
+    const { pattern, state: { redirect: { location = '' } = {} } = {} } = getCurrentRoute();
     LoadingProvider.setLoading(pattern);
     dispatch(disableLogin(true));
 

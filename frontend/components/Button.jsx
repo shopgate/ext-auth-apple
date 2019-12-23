@@ -29,7 +29,7 @@ const image = css({
 });
 
 /**
- * Transforms the app config languege to ISO format.
+ * Transforms the app config language to ISO format.
  * @returns {string}
  */
 function getLocale() {
