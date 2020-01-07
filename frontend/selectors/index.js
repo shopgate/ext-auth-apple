@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { isIos, makeSupportsIdentityService } from '@shopgate/engage/core';
 
 const statePrefix = '@shopgate/auth-apple/reducer';
 
@@ -15,8 +16,12 @@ function getExtensionsState(state) {
  * @returns {Function}
  */
 export function makeGetIsEnabled() {
+  const supportsIdentityService = makeSupportsIdentityService('apple');
+
   return createSelector(
     getExtensionsState,
-    state => state.enabled
+    isIos,
+    supportsIdentityService,
+    (state, isIosDevice, supported) => (state.enabled && isIosDevice && supported)
   );
 }

@@ -1,10 +1,11 @@
 import React, { useContext, useCallback, memo } from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'glamor';
-import cxs from 'classnames';
+import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { LoadingContext } from '@shopgate/engage/core';
 import { getCurrentRoute } from '@shopgate/pwa-common/helpers/router';
+import appConfig from '@shopgate/pwa-common/helpers/config';
 import { signInWithApple } from '../action-creators';
 
 const button = css({
@@ -28,6 +29,16 @@ const image = css({
 });
 
 /**
+ * Transforms the app config language to ISO format.
+ * @returns {string}
+ */
+function getLocale() {
+  const pieces = appConfig.language.split('-');
+  const locale = `${pieces[0]}_${pieces[1].toUpperCase()}`;
+  return locale;
+}
+
+/**
  * Renders the actual login button.
  * @param {Object} props The component props.
  * @returns {JSX}
@@ -37,7 +48,7 @@ function Button({ signIn }) {
   const { isLoading } = useContext(LoadingContext);
   const loading = isLoading(pattern);
 
-  const btnClasses = cxs({
+  const btnClasses = classnames({
     [button]: true,
     [btnDisabled]: loading,
   });
@@ -54,7 +65,7 @@ function Button({ signIn }) {
     <button type="button" className={btnClasses} onClick={handleSignIn} disabled={loading}>
       <img
         className={image}
-        src="https://appleid.cdn-apple.com/appleid/button?height=40&width=375&color=black&locale=de_DE&scale=2"
+        src={`https://appleid.cdn-apple.com/appleid/button?height=40&width=375&color=black&locale=${getLocale()}&scale=2`}
         alt="Sign in with Apple"
       />
     </button>
