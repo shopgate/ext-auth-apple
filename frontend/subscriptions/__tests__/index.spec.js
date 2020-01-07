@@ -12,6 +12,7 @@ jest.mock('@shopgate/engage/user', () => ({
   disableLogin: jest.fn(),
 }));
 jest.mock('@shopgate/engage/core', () => ({
+  ...jest.requireActual('@shopgate/engage/core'),
   LoadingProvider: {
     setLoading: jest.fn(),
     unsetLoading: jest.fn(),

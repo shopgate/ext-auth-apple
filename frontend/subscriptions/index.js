@@ -1,6 +1,8 @@
 import { getCurrentRoute } from '@shopgate/pwa-common/helpers/router';
 import { login, disableLogin } from '@shopgate/engage/user';
-import { appWillStart$, LoadingProvider } from '@shopgate/engage/core';
+import {
+  appWillStart$, LoadingProvider, showModal, i18n,
+} from '@shopgate/engage/core';
 import {
   requestSignInWithAppleAuthorization,
   // requestSignInWithAppleCredentialState,
@@ -26,6 +28,13 @@ export default (subscribe) => {
     try {
       const authorizationResponse = await requestSignInWithAppleAuthorization();
       dispatch(login({ authorizationResponse }, location, 'apple'));
+    } catch (error) {
+      dispatch(showModal({
+        confirm: 'modal.ok',
+        dismiss: null,
+        title: null,
+        message: i18n.text('@shopgate/apple-login.try_again_later'),
+      }));
     } finally {
       LoadingProvider.unsetLoading(pattern);
       dispatch(disableLogin(false));

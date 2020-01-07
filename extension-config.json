@@ -23,6 +23,16 @@
       "id": "reducer",
       "path": "frontend/reducers/index.js",
       "type": "reducers"
+    },
+    {
+      "type": "translations",
+      "path": "frontend/locales/en-US.json",
+      "id": "locale/en-US"
+    },
+    {
+      "type": "translations",
+      "path": "frontend/locales/de-DE.json",
+      "id": "locale/de-DE"
     }
   ],
   "configuration": {
