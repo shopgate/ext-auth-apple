@@ -31,7 +31,10 @@ export default (subscribe) => {
 
     try {
       const authorizationResponse = await requestSignInWithAppleAuthorization();
-      dispatch(login({ authorizationResponse }, location, 'apple'));
+
+      if (authorizationResponse !== null) {
+        dispatch(login({ authorizationResponse }, location, 'apple'));
+      }
     } catch (error) {
       dispatch(showModal({
         confirm: 'modal.ok',
