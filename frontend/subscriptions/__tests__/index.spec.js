@@ -31,7 +31,7 @@ describe('requestSignInWithAppleAuthorization()', () => {
   subscriptions(subscribe);
 
   it('should have N subscriptions', () => {
-    expect(subscribe).toBeCalledTimes(2);
+    expect(subscribe).toBeCalledTimes(3);
   });
 
   describe('should process sing in with apple', () => {

@@ -3,7 +3,7 @@ import {
   login, logout, disableLogin, userDataReceived$,
 } from '@shopgate/engage/user';
 import {
-  LoadingProvider, showModal, i18n,
+  LoadingProvider, showModal, i18n, appWillStart$, logger,
 } from '@shopgate/engage/core';
 import {
   requestSignInWithAppleAuthorization,
@@ -16,11 +16,18 @@ import { fetchAppleConfig } from '../actions';
  * @param {Function} subscribe The subscribe function.
  */
 export default (subscribe) => {
-  subscribe(userDataReceived$, async ({ dispatch, action }) => {
+  subscribe(appWillStart$, ({ dispatch }) => {
     dispatch(fetchAppleConfig());
-    const result = await requestSignInWithAppleCredentialState(action.user.userIdentifier);
-    if (result !== 'authorized') {
-      dispatch(logout());
+  });
+
+  subscribe(userDataReceived$, async ({ dispatch, action }) => {
+    try {
+      const result = await requestSignInWithAppleCredentialState(action.user.userIdentifier);
+      if (result !== 'authorized') {
+        dispatch(logout());
+      }
+    } catch (error) {
+      logger.error(error);
     }
   });
 
