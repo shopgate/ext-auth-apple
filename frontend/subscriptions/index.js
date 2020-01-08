@@ -1,6 +1,6 @@
 import { getCurrentRoute } from '@shopgate/pwa-common/helpers/router';
 import {
-  login, logout, disableLogin, userDataReceived$,
+  login, logout, disableLogin,
 } from '@shopgate/engage/user';
 import {
   LoadingProvider, showModal, i18n, appWillStart$, logger,
@@ -9,7 +9,7 @@ import {
   requestSignInWithAppleAuthorization,
   requestSignInWithAppleCredentialState,
 } from '../classes';
-import { signInWithApple$ } from '../streams';
+import { signInWithApple$, receivedUserDataAndAppleConfig$ } from '../streams';
 import { fetchAppleConfig } from '../actions';
 
 /**
@@ -20,7 +20,7 @@ export default (subscribe) => {
     dispatch(fetchAppleConfig());
   });
 
-  subscribe(userDataReceived$, async ({ dispatch, action }) => {
+  subscribe(receivedUserDataAndAppleConfig$, async ({ dispatch, action }) => {
     try {
       const result = await requestSignInWithAppleCredentialState(action.user.userIdentifier);
       if (result !== 'authorized') {
