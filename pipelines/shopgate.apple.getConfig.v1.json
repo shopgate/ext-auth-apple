@@ -1,0 +1,105 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.apple.getConfig.v1",
+    "public": true,
+    "input": [],
+    "output": [
+      {
+        "key": "enabled",
+        "id": "1010"
+      }
+    ],
+    "steps": [
+      {
+        "type": "extension",
+        "id": "@shopgate/auth-apple",
+        "path": "@shopgate/auth-apple/config/getRequest.js",
+        "input": [],
+        "output": [
+          {
+            "id": "10",
+            "key": "service"
+          },
+          {
+            "id": "11",
+            "key": "version"
+          },
+          {
+            "id": "12",
+            "key": "path"
+          },
+          {
+            "id": "13",
+            "key": "method"
+          }
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/bigapi-trusted",
+        "path": "@shopgate/bigapi-trusted/big-api/getBigApiResult.js",
+        "input": [
+          {
+            "id": "10",
+            "key": "service"
+          },
+          {
+            "id": "11",
+            "key": "version"
+          },
+          {
+            "id": "12",
+            "key": "path"
+          },
+          {
+            "id": "13",
+            "key": "method"
+          }
+        ],
+        "output": [
+          {
+            "id": "14",
+            "key": "value"
+          }
+        ]
+      },
+      {
+        "type": "errorCatchExtension",
+        "id": "@shopgate/auth-apple",
+        "path": "@shopgate/auth-apple/config/catch.js",
+        "input": [
+          {
+            "id": "14",
+            "key": "config",
+            "optional": true
+          }
+        ],
+        "output": [
+          {
+            "id": "14",
+            "key": "config",
+            "optional": true
+          }
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/auth-apple",
+        "path": "@shopgate/auth-apple/config/sanitize.js",
+        "input": [
+          {
+            "id": "14",
+            "key": "config"
+          }
+        ],
+        "output": [
+          {
+            "id": "1010",
+            "key": "enabled"
+          }
+        ]
+      }
+    ]
+  }
+}
