@@ -1,23 +1,34 @@
 import { getCurrentRoute } from '@shopgate/pwa-common/helpers/router';
-import { login, disableLogin } from '@shopgate/engage/user';
 import {
-  appWillStart$, LoadingProvider, showModal, i18n,
+  login, logout, disableLogin,
+} from '@shopgate/engage/user';
+import {
+  LoadingProvider, showModal, i18n, appWillStart$, logger,
 } from '@shopgate/engage/core';
 import {
   requestSignInWithAppleAuthorization,
-  // requestSignInWithAppleCredentialState,
+  requestSignInWithAppleCredentialState,
 } from '../classes';
-import { signInWithApple$ } from '../streams';
+import { signInWithApple$, receivedUserDataAndAppleConfig$ } from '../streams';
 import { fetchAppleConfig } from '../actions';
 
 /**
  * @param {Function} subscribe The subscribe function.
  */
 export default (subscribe) => {
-  subscribe(appWillStart$, async ({ dispatch }) => {
+  subscribe(appWillStart$, ({ dispatch }) => {
     dispatch(fetchAppleConfig());
-    // const result = await requestSignInWithAppleCredentialState();
-    // Handle logout;
+  });
+
+  subscribe(receivedUserDataAndAppleConfig$, async ({ dispatch, action }) => {
+    try {
+      const result = await requestSignInWithAppleCredentialState(action.user.userIdentifier);
+      if (result !== 'authorized') {
+        dispatch(logout());
+      }
+    } catch (error) {
+      logger.error(error);
+    }
   });
 
   subscribe(signInWithApple$, async ({ dispatch }) => {
