@@ -1,9 +1,13 @@
 import { getCurrentRoute } from '@shopgate/pwa-common/helpers/router';
+import { login, logout, disableLogin } from '@shopgate/engage/user';
+
 import {
-  login, logout, disableLogin,
-} from '@shopgate/engage/user';
-import {
-  LoadingProvider, showModal, i18n, appWillStart$, logger,
+  LoadingProvider,
+  showModal,
+  i18n,
+  logger,
+  clientInformationDidUpdate$,
+  makeSupportsIdentityService,
 } from '@shopgate/engage/core';
 import {
   requestSignInWithAppleAuthorization,
@@ -16,7 +20,13 @@ import { fetchAppleConfig } from '../actions';
  * @param {Function} subscribe The subscribe function.
  */
 export default (subscribe) => {
-  subscribe(appWillStart$, ({ dispatch }) => {
+  const supportsSignInWithApple = makeSupportsIdentityService('apple');
+
+  subscribe(clientInformationDidUpdate$, ({ dispatch, getState }) => {
+    if (!supportsSignInWithApple(getState())) {
+      return;
+    }
+
     dispatch(fetchAppleConfig());
   });
 
