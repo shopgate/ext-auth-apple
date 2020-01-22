@@ -7,14 +7,13 @@ import { SUPPORTED_BUTTON_LOCALES, DEFAULT_BUTTON_LOCALE } from '../constants';
  */
 export function getLocale() {
   const [language, region] = appConfig.language.split('-');
-  let locale = `${language}_${region.toUpperCase()}`;
+  const locale = `${language}_${region.toUpperCase()}`;
 
   if (!SUPPORTED_BUTTON_LOCALES.includes(locale)) {
-    locale = SUPPORTED_BUTTON_LOCALES.find(entry => entry.startsWith(language));
-  }
-
-  if (!locale) {
-    locale = DEFAULT_BUTTON_LOCALE;
+    return (
+      SUPPORTED_BUTTON_LOCALES.find(entry => entry.startsWith(language)) ||
+      DEFAULT_BUTTON_LOCALE
+    );
   }
 
   return locale;
