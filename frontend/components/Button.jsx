@@ -5,18 +5,8 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { LoadingContext } from '@shopgate/engage/core';
 import { getCurrentRoute } from '@shopgate/pwa-common/helpers/router';
-import appConfig from '@shopgate/pwa-common/helpers/config';
 import { signInWithApple } from '../action-creators';
-
-/**
- * Transforms the app config language to ISO format.
- * @returns {string}
- */
-function getLocale() {
-  const pieces = appConfig.language.split('-');
-  const locale = `${pieces[0]}_${pieces[1].toUpperCase()}`;
-  return locale;
-}
+import { getLocale } from '../helpers';
 
 const button = css({
   border: 0,
