@@ -4,6 +4,9 @@ export const REQUEST_APPLE_CONFIG = 'REQUEST_APPLE_CONFIG';
 export const REQUEST_APPLE_CONFIG_SUCCESS = 'REQUEST_APPLE_CONFIG_SUCCESS';
 export const REQUEST_APPLE_CONFIG_ERROR = 'REQUEST_APPLE_CONFIG_ERROR';
 
+/**
+ * @link https://developer.apple.com/documentation/signinwithapplejs/incorporating_sign_in_with_apple_into_other_platforms
+ */
 export const SUPPORTED_BUTTON_LOCALES = [
   'ar_SA',
   'ca_ES',
