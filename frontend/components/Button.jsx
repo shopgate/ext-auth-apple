@@ -16,8 +16,10 @@ const button = css({
   width: '100%',
   display: 'block',
   height: 40,
-  backgroundImage: `url('https://appleid.cdn-apple.com/appleid/button?height=40&width=375&color=black&locale=${getLocale()}&scale=2')`,
-  backgroundSize: 'cover',
+  background: '#000',
+  backgroundImage: `url('https://connect.shopgate.com/assets/img/sign-in-with-apple-button-${getLocale()}.png')`,
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'contain',
   backgroundPosition: 'center',
   borderRadius: 5,
 });
